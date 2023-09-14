@@ -17,8 +17,8 @@ label:
       - xingxingxia
       - wangke19
       - gangwgr
-      - knarra
-      - yinzhou
+      - zhouying7780
+      - kasturinarra
       label: cherry-pick-approved
 plugins:
   openshift/openshift-controller-manager:
