@@ -665,6 +665,18 @@ tests:
     test:
     - chain: openshift-e2e-test-qe-destructive
     workflow: cucushift-installer-rehearse-aws-ipi-edge-zone-cco-manual-security-token-service
+- as: aws-ipi-lvms-mno-amd-f7
+  cron: 33 14 6,15,22,29 * *
+  steps:
+    cluster_profile: aws-qe
+    env:
+      BASE_DOMAIN: qe.devcluster.openshift.com
+      LVM_OPERATOR_SUB_SOURCE: lvm-catalogsource
+      TEST_FILTERS: ~ChkUpgrade&;~DisconnectedOnly&;~HyperShiftMGMT&;~MicroShiftOnly&;~StagerunOnly;~LSO&;STORAGE&
+      TEST_SCENARIOS: \[LVMS\]
+    test:
+    - ref: openshift-extended-test
+    workflow: cucushift-installer-rehearse-aws-ipi-mno-lvms
 - as: aws-ipi-ovn-stress-f28
   cron: 19 17 7 * *
   steps:
@@ -4477,6 +4489,41 @@ tests:
     - ref: cucushift-installer-check-capability
     - chain: openshift-e2e-test-qe
     workflow: baremetal-lab-sno
+- as: baremetal-sno-dualstack-lvms-f7
+  capabilities:
+  - intranet
+  cron: 38 15 3,12,19,26 * *
+  steps:
+    cluster_profile: equinix-ocp-metal-qe
+    env:
+      AUX_HOST: openshift-qe-metal-ci.arm.eng.rdu2.redhat.com
+      LVM_OPERATOR_SUB_SOURCE: lvm-catalogsource
+      RESERVE_BOOTSTRAP: "false"
+      TEST_FILTERS: ~ChkUpgrade&;~DisconnectedOnly&;~HyperShiftMGMT&;~MicroShiftOnly&;~StagerunOnly;~LSO&;STORAGE&
+      TEST_SCENARIOS: \[LVMS\]
+      architecture: amd64
+      masters: "1"
+      workers: "0"
+    test:
+    - ref: openshift-extended-test
+    workflow: baremetal-lab-upi-dual-stack-sno-lvms
+- as: baremetal-mno-dualstack-lvms-f7
+  capabilities:
+  - intranet
+  cron: 52 12 5,14,21,28 * *
+  steps:
+    cluster_profile: equinix-ocp-metal-qe
+    env:
+      AUX_HOST: openshift-qe-metal-ci.arm.eng.rdu2.redhat.com
+      LVM_OPERATOR_SUB_SOURCE: lvm-catalogsource
+      TEST_FILTERS: ~ChkUpgrade&;~DisconnectedOnly&;~HyperShiftMGMT&;~MicroShiftOnly&;~StagerunOnly;~LSO&;STORAGE&
+      TEST_SCENARIOS: \[LVMS\]
+      architecture: amd64
+      masters: "3"
+      workers: "2"
+    test:
+    - ref: openshift-extended-test
+    workflow: baremetal-lab-upi-dual-stack-lvms
 - as: baremetal-upi-ovn-ipv6-static-rt-kernel-f7
   capabilities:
   - intranet

@@ -1,0 +1,19 @@
+workflow:
+  as: baremetal-lab-upi-dual-stack-lvms
+  steps:
+    pre:
+      - chain: baremetal-lab-upi-conf
+      - chain: baremetal-lab-upi-install
+      - ref: baremetal-lab-etcd-encryption
+      - ref: baremetal-lab-local-gateway-mode
+      - chain: storage-conf-csi-optional-topolvm
+    post:
+      - chain: baremetal-lab-post
+      - ref: send-results-to-reportportal
+    env:
+      ipv6_enabled: "true"
+      PRIMARY_NET: "ipv4"
+  documentation: |-
+    The baremetal-lab-upi-dual-stack-lvms workflow provides pre- and post- steps that provision and
+    deprovision a Multi-Node OpenShift cluster with IPv6 dual-stack configuration on a Baremetal lab
+    and install the LVMS operator, allowing job authors to inject their own end-to-end test logic.

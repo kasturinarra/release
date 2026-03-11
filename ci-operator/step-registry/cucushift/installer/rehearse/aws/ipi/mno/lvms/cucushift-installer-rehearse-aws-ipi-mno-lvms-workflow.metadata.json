@@ -1,0 +1,17 @@
+{
+	"path": "cucushift/installer/rehearse/aws/ipi/mno/lvms/cucushift-installer-rehearse-aws-ipi-mno-lvms-workflow.yaml",
+	"owners": {
+		"approvers": [
+			"yunjiang29",
+			"jianlinliu",
+			"gpei",
+			"wangke19"
+		],
+		"reviewers": [
+			"yunjiang29",
+			"jianlinliu",
+			"gpei",
+			"wangke19"
+		]
+	}
+}
